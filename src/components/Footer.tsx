@@ -160,6 +160,15 @@ export default function Footer() {
             </a>
             <a href="tel:+919871814324" className="mt-2 inline-flex items-center gap-2 text-sm text-zinc-500 transition-colors hover:text-zinc-300" aria-label="Call Md Aadil Ansari">
               <span aria-hidden="true">☎</span> 9871814324
+              <a
+  href="https://www.instagram.com/dr_aadil_ansari"
+  target="_blank"
+  rel="noreferrer"
+  className="mt-2 inline-flex items-center gap-2 text-sm text-zinc-500 transition-colors hover:text-fuchsia-300"
+>
+  <InstagramIcon className="h-4 w-4" aria-hidden="true" />
+  @dr_aadil_ansari
+</a>
             </a>
             <p className="mt-3 font-mono text-xs text-zinc-500">
               Replies within 24 hours · Mon–Sat
