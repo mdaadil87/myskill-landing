@@ -15,7 +15,7 @@ const FAQS = [
   },
   {
     q: "How much will my project cost?",
-    a: "Most landing sprints run $499–$1,200, websites and web apps from $2,900, and app MVPs from $5,000. AI and automation tools are quoted per scope. After a free strategy call you'll receive a fixed, itemized quote — no hourly meter, no surprise invoices.",
+    a: "Landing sprints start at ₹999, and full websites, web apps or app MVPs start at ₹2,499 — billed in Indian Rupees. AI and automation tools are quoted per scope. After a free strategy call you'll receive a fixed, itemized quote — no hourly meter, no surprise invoices.",
   },
   {
     q: "Can you work with my existing team or codebase?",
