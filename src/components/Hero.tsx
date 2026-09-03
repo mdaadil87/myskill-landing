@@ -82,6 +82,15 @@ export default function Hero() {
               className="hidden text-[13px] font-semibold text-emerald-200 underline-offset-4 transition hover:underline sm:inline"
             >
               mdaadilansari248@gmail.com · 9871814324
+              <a
+  href="https://www.instagram.com/dr_aadil_ansari"
+  target="_blank"
+  rel="noreferrer"
+  className="mt-2 inline-flex items-center gap-2 text-sm text-zinc-500 transition-colors hover:text-fuchsia-300"
+>
+  <InstagramIcon className="h-4 w-4" aria-hidden="true" />
+  @dr_aadil_ansari
+</a>
             </a>
           </div>
 
