@@ -15,9 +15,22 @@ type Project = {
   tags: string[];
   metric: string;
   alt: string;
+  href?: string;
 };
 
 const PROJECTS: Project[] = [
+  {
+    id: "play-with-aadil",
+    title: "Play with Aadil",
+    category: "Websites",
+    description:
+      "A neon arcade cabinet with four fast classics — Tic-Tac-Toe, Snake, Pong and Flappy Bird. Pick a game and jump straight in.",
+    image: "images/project-aadil.jpg",
+    tags: ["JavaScript", "Canvas", "Vercel"],
+    metric: "4 games · endless fun",
+    alt: "Play with Aadil neon arcade games selection screen",
+    href: "https://play-with-aadil.vercel.app/",
+  },
   {
     id: "nova",
     title: "Nova Analytics",
@@ -135,7 +148,13 @@ export default function Showcase() {
               className="animate-pop group relative overflow-hidden rounded-[1.6rem] border border-white/[0.08] bg-white/[0.03] transition-all duration-500 hover:-translate-y-1.5 hover:border-white/[0.18] hover:shadow-2xl hover:shadow-violet-950/40"
               style={{ animationDelay: `${i * 80}ms` }}
             >
-              <a href="#contact" className="flex h-full flex-col" aria-label={`${p.title} case study`}>
+              <a
+                href={p.href ?? "#contact"}
+                target={p.href ? "_blank" : undefined}
+                rel={p.href ? "noopener noreferrer" : undefined}
+                className="flex h-full flex-col"
+                aria-label={`${p.title} ${p.href ? "project link" : "case study"}`}
+              >
                 <div className="relative aspect-[4/3] overflow-hidden">
                   <img
                     src={p.image}
