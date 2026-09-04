@@ -17,7 +17,7 @@ const TIERS: Tier[] = [
   {
     name: "Landing Sprint",
     tagline: "A polished, high-converting launch page — fast.",
-    price: "₹499",
+    price: "₹999",
     priceNote: "one-time · 7-day delivery",
     cta: "Start a sprint",
     accent: "from-cyan-400 to-sky-500",
@@ -34,7 +34,7 @@ const TIERS: Tier[] = [
     name: "Product Launch",
     tagline: "A full website or app MVP, end-to-end.",
     price: "₹2,500",
-    priceNote: "from · typical 2–6 week build",
+    priceNote: "from · typical 2–3 week build",
     cta: "Book a free intro call",
     popular: true,
     accent: "from-indigo-500 via-violet-500 to-fuchsia-500",
