@@ -104,21 +104,38 @@ export default function Hero() {
               className="hidden text-[13px] font-semibold text-lime-200 underline-offset-4 transition hover:text-lime-100 hover:underline sm:inline"
             >
               mdaadilansari248@gmail.com · 9871814324
-   
             </a>
           </div>
 
           <h1
-            className="font-display animate-rise mt-6 text-[2.65rem] leading-[1.05] font-semibold tracking-tight text-white sm:text-6xl lg:text-[4.15rem]"
+            className="font-display animate-rise mt-6 text-[3rem] leading-[1.02] font-semibold tracking-[-0.03em] text-white sm:text-6xl lg:text-[4.4rem]"
             style={{ animationDelay: "140ms" }}
           >
-            Websites, apps &{" "}
-            <span className="text-shine">AI magic</span> — engineered to convert.
+            MD Aadil
           </h1>
 
+          <h2
+            className="animate-rise mt-4 flex items-center gap-3 font-mono text-[11px] font-medium tracking-[0.3em] text-lime-300 uppercase sm:text-[12.5px]"
+            style={{ animationDelay: "190ms" }}
+          >
+            <span
+              aria-hidden="true"
+              className="h-px w-8 bg-gradient-to-r from-lime-300/80 to-transparent"
+            />
+            Full-Stack Developer &amp; Creator
+          </h2>
+
           <p
-            className="animate-rise mt-6 max-w-xl text-base leading-relaxed text-zinc-400 sm:text-lg"
-            style={{ animationDelay: "240ms" }}
+            className="animate-rise mt-6 max-w-xl font-display text-xl leading-snug font-medium text-white/90 sm:text-2xl"
+            style={{ animationDelay: "250ms" }}
+          >
+            Websites, apps &amp; <span className="text-shine">AI magic</span> — engineered to
+            convert.
+          </p>
+
+          <p
+            className="animate-rise mt-4 max-w-xl text-base leading-relaxed text-zinc-400 sm:text-lg"
+            style={{ animationDelay: "310ms" }}
           >
             Hi, I&apos;m <span className="font-semibold text-zinc-200">Md Aadil Ansari</span> —
             a 19-year-old <span className="text-zinc-200">NEET aspirant</span> from Loni,
@@ -132,7 +149,7 @@ export default function Hero() {
           {/* CTAs */}
           <div
             className="animate-rise mt-9 flex flex-wrap items-center gap-4"
-            style={{ animationDelay: "330ms" }}
+            style={{ animationDelay: "380ms" }}
           >
             <ButtonLink href="#contact" size="lg">
               Start your project
@@ -149,7 +166,7 @@ export default function Hero() {
           {/* trust row */}
           <div
             className="animate-rise mt-10 flex flex-wrap items-center gap-x-5 gap-y-4"
-            style={{ animationDelay: "420ms" }}
+            style={{ animationDelay: "450ms" }}
           >
             <div className="flex -space-x-3" aria-hidden="true">
               {TRUST_NAMES.map((name, i) => (
