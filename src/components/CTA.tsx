@@ -23,14 +23,6 @@ const SERVICE_OPTIONS = [
   "Something else",
 ];
 
-const BUDGET_OPTIONS = [
-  "Not sure yet — guide me",
-  "Under ₹25,000",
-  "₹25,000 – ₹75,000",
-  "₹75,000 – ₹2,00,000",
-  "₹2,00,000+",
-];
-
 const OWNER_EMAIL = "mdaadilansari248@gmail.com";
 const OWNER_PHONE_DISPLAY = "9871814324";
 const OWNER_PHONE_TEL = "+919871814324";
@@ -52,7 +44,7 @@ const EMPTY: FormState = {
   email: "",
   phone: "",
   service: SERVICE_OPTIONS[0],
-  budget: BUDGET_OPTIONS[0],
+  budget: "",
   message: "",
 };
 
@@ -101,7 +93,7 @@ export default function CTA() {
 
   const mailtoFallback = () => {
     const body = encodeURIComponent(
-      `New MySkill Project Request\n\nName: ${form.name}\nEmail: ${form.email}\nPhone: ${form.phone || "—"}\nService: ${form.service}\nBudget: ${form.budget}\nDetails: ${form.message || "—"}\n\n— Sent from MySkill landing page`
+      `New MySkill Project Request\n\nName: ${form.name}\nEmail: ${form.email}\nPhone: ${form.phone || "—"}\nService: ${form.service}\nBudget: ${form.budget || "—"}\nDetails: ${form.message || "—"}\n\n— Sent from MySkill landing page`
     );
     return `mailto:${OWNER_EMAIL}?subject=${encodeURIComponent(
       `Project request — ${form.service} — ${form.name || "New client"}`
@@ -124,7 +116,7 @@ export default function CTA() {
           Email: form.email,
           "Phone / WhatsApp": form.phone || "—",
           "Service needed": form.service,
-          Budget: form.budget,
+          Budget: form.budget || "—",
           "Project details": form.message || "—",
           Source: "MySkill landing page",
         }),
@@ -228,7 +220,7 @@ export default function CTA() {
                       ["Email", form.email],
                       ["Phone", form.phone || "—"],
                       ["Service", form.service],
-                      ["Budget", form.budget],
+                      ["Budget", form.budget || "—"],
                       ["Details", form.message || "—"],
                     ].map(([k, v]) => (
                       <div
@@ -325,23 +317,21 @@ export default function CTA() {
 
                     <Field
                       id="f-budget"
-                      label="Budget range"
-                      hint="A rough idea is enough"
+                      label="Budget"
+                      hint="A rough idea is enough — leave it blank if you're unsure"
                       icon={Wallet}
                       className="sm:col-span-2"
                     >
-                      <select
+                      <input
                         id="f-budget"
+                        type="text"
+                        inputMode="text"
+                        autoComplete="off"
                         value={form.budget}
                         onChange={set("budget")}
-                        className={`${inputCls} appearance-none`}
-                      >
-                        {BUDGET_OPTIONS.map((b) => (
-                          <option key={b} value={b} className="bg-base-900">
-                            {b}
-                          </option>
-                        ))}
-                      </select>
+                        placeholder="₹25,000 or 'Not sure yet'"
+                        className={inputCls}
+                      />
                     </Field>
 
                     <Field
@@ -391,7 +381,7 @@ export default function CTA() {
                     <button
                       type="submit"
                       disabled={status === "sending"}
-                      className="btn-shine group inline-flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 px-8 py-3.5 text-[15px] font-semibold text-white shadow-[0_10px_36px_-8px_rgba(139,92,246,0.7)] transition-all duration-300 hover:brightness-110 active:scale-[0.98] disabled:cursor-wait disabled:opacity-70 sm:w-auto"
+                      className="btn-3d btn-shine group inline-flex w-full items-center justify-center gap-2 rounded-full px-8 py-3.5 text-[15px] font-semibold text-white disabled:cursor-wait disabled:opacity-70 sm:w-auto"
                     >
                       {status === "sending" ? (
                         <>
