@@ -63,15 +63,15 @@ export default function Benefits() {
       {/* ambient */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute top-24 -right-40 h-[26rem] w-[26rem] rounded-full bg-cyan-500/[0.07] blur-[130px]"
+        className="pointer-events-none absolute top-24 -right-40 h-[26rem] w-[26rem] rounded-full bg-teal-400/[0.09] blur-[130px]"
       />
 
       <div className="relative mx-auto grid max-w-7xl grid-cols-1 gap-14 px-5 sm:px-8 lg:grid-cols-[0.95fr_1.05fr] lg:gap-20">
         {/* left — sticky pitch */}
         <div className="lg:sticky lg:top-28 lg:self-start">
           <Reveal>
-            <span className="glass inline-flex items-center gap-2 rounded-full px-4 py-1.5 font-mono text-[11px] font-medium tracking-[0.22em] text-cyan-300 uppercase">
-              <span className="h-1.5 w-1.5 rounded-full bg-gradient-to-r from-cyan-400 to-sky-400" />
+            <span className="glass inline-flex items-center gap-2 rounded-full px-4 py-1.5 font-mono text-[11px] font-medium tracking-[0.22em] text-teal-300 uppercase">
+              <span className="h-1.5 w-1.5 animate-pulse-soft rounded-full bg-gradient-to-r from-lime-300 to-teal-300 shadow-[0_0_10px_rgba(198,248,6,0.9)]" />
               Why MySkill
             </span>
           </Reveal>
@@ -92,7 +92,7 @@ export default function Benefits() {
             <ul className="mt-8 space-y-4">
               {BENEFITS.map((b) => (
                 <li key={b.title} className="group flex items-start gap-3.5">
-                  <CheckCircle2 className="mt-0.5 h-5.5 w-5.5 shrink-0 text-cyan-300 transition-transform duration-300 group-hover:scale-110" />
+                  <CheckCircle2 className="mt-0.5 h-5.5 w-5.5 shrink-0 text-lime-300 transition-transform duration-300 group-hover:scale-110" />
                   <div>
                     <p className="text-[15px] font-semibold text-zinc-100">{b.title}</p>
                     <p className="mt-0.5 text-[14px] leading-relaxed text-zinc-500">{b.copy}</p>
@@ -120,16 +120,16 @@ export default function Benefits() {
           {/* connector line */}
           <div
             aria-hidden="true"
-            className="absolute top-6 bottom-6 left-[27px] w-px bg-gradient-to-b from-indigo-500/60 via-fuchsia-500/40 to-cyan-400/20 sm:left-[31px]"
+            className="absolute top-6 bottom-6 left-[27px] w-px bg-gradient-to-b from-lime-300/70 via-teal-300/45 to-transparent sm:left-[31px]"
           />
           <ol className="space-y-6">
             {STEPS.map((step, i) => (
               <li key={step.num}>
                 <Reveal delay={i * 130} dir="right">
-                  <SpotlightCard className="group relative flex gap-5 rounded-3xl border border-white/[0.08] bg-white/[0.03] p-6 transition-all duration-500 hover:-translate-y-1 hover:border-white/[0.16] sm:gap-6 sm:p-7">
+                  <SpotlightCard className="glass-card group relative flex gap-5 rounded-3xl p-6 sm:gap-6 sm:p-7">
                     <div className="relative shrink-0">
-                      <span className="font-display relative z-10 flex h-14 w-14 items-center justify-center rounded-2xl border border-white/10 bg-base-900 text-lg font-bold text-transparent sm:h-16 sm:w-16 sm:text-xl">
-                        <span className="bg-gradient-to-br from-indigo-400 via-violet-400 to-fuchsia-400 bg-clip-text">
+                      <span className="font-display relative z-10 flex h-14 w-14 items-center justify-center rounded-2xl border border-white/15 bg-white/[0.05] text-lg font-bold text-transparent shadow-[inset_0_1px_0_rgba(255,255,255,0.18)] backdrop-blur-xl sm:h-16 sm:w-16 sm:text-xl">
+                        <span className="bg-gradient-to-br from-lime-200 via-lime-400 to-teal-300 bg-clip-text">
                           {step.num}
                         </span>
                       </span>
@@ -155,7 +155,7 @@ export default function Benefits() {
 
           {/* result chip */}
           <Reveal delay={560}>
-            <div className="glass mt-6 flex flex-wrap items-center justify-between gap-4 rounded-3xl px-6 py-5">
+            <div className="glass-panel mt-6 flex flex-wrap items-center justify-between gap-4 rounded-3xl px-6 py-5">
               <p className="text-sm text-zinc-300">
                 <span className="font-display text-2xl font-bold text-white">3 weeks</span>{" "}
                 — average time from idea to first launch
@@ -169,14 +169,14 @@ export default function Benefits() {
 
           {/* founder signature note */}
           <Reveal delay={640}>
-            <figure className="group relative mt-6 overflow-hidden rounded-3xl border border-white/[0.08] bg-gradient-to-br from-violet-500/[0.08] via-white/[0.03] to-transparent p-6 transition-colors duration-500 hover:border-violet-400/25">
+            <figure className="glass-card group relative mt-6 overflow-hidden rounded-3xl p-6">
               <div className="flex items-start gap-4">
                 <AadilPhoto
                   alt="Md Aadil Ansari working at his development desk"
                   loading="lazy"
                   width={96}
                   height={96}
-                  className="h-16 w-16 shrink-0 rounded-2xl object-cover object-[75%_40%] ring-2 ring-violet-400/40 transition-transform duration-500 group-hover:scale-105"
+                  className="h-16 w-16 shrink-0 rounded-2xl object-cover object-[75%_40%] shadow-[0_10px_30px_-12px_rgba(198,248,6,0.6)] ring-2 ring-lime-300/50 transition-transform duration-500 group-hover:scale-105"
                 />
                 <blockquote className="min-w-0 flex-1 text-[15px] leading-relaxed text-zinc-300 italic">
                   “I blend logical problem-solving with creative tech solutions —
@@ -195,7 +195,7 @@ export default function Benefits() {
                 </div>
                 <span
                   aria-hidden="true"
-                  className="font-display bg-gradient-to-r from-violet-300 to-fuchsia-300 bg-clip-text text-xl text-transparent italic"
+                  className="font-display bg-gradient-to-r from-lime-200 to-teal-200 bg-clip-text text-xl text-transparent italic"
                 >
                   — Aadil
                 </span>

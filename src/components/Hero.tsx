@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import {
   ArrowRight,
   BadgeCheck,
@@ -31,7 +32,7 @@ function Chip({
       style={{ animationDelay: `${delay}ms` }}
       className={`glass-strong animate-float absolute z-20 flex items-center gap-3 rounded-2xl px-4 py-3 shadow-2xl shadow-black/40 ${className ?? ""}`}
     >
-      <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-indigo-500 to-violet-600 text-white shadow-lg shadow-violet-900/50">
+      <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-lime-200 to-teal-400 text-base-950 shadow-[inset_0_1px_0_rgba(255,255,255,0.7),0_8px_22px_-8px_rgba(198,248,6,0.6)]">
         <Icon className="h-4.5 w-4.5" />
       </span>
       <span className="leading-tight">
@@ -43,22 +44,43 @@ function Chip({
 }
 
 export default function Hero() {
+  // gentle scroll parallax for the portrait + ambient glow (rAF-throttled,
+  // disabled for reduced-motion users so it can never feel jumpy)
+  const [scrollY, setScrollY] = useState(0);
+
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    let frame = 0;
+    const onScroll = () => {
+      if (frame) return;
+      frame = requestAnimationFrame(() => {
+        frame = 0;
+        setScrollY(Math.min(window.scrollY, 900));
+      });
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      cancelAnimationFrame(frame);
+    };
+  }, []);
+
   return (
     <section id="top" className="relative overflow-hidden pt-36 pb-20 sm:pt-40 lg:pb-28">
       {/* ---- ambient background ---- */}
       <div aria-hidden="true" className="pointer-events-none absolute inset-0">
         <div className="bg-grid mask-fade-y absolute inset-0 opacity-70" />
-        <div className="animate-blob absolute -top-40 left-1/2 h-[34rem] w-[34rem] -translate-x-[85%] rounded-full bg-indigo-600/25 blur-[130px]" />
+        <div className="animate-blob absolute -top-40 left-1/2 h-[34rem] w-[34rem] -translate-x-[85%] rounded-full bg-lime-400/[0.16] blur-[130px]" />
         <div
-          className="animate-blob absolute top-10 right-[-12rem] h-[32rem] w-[32rem] rounded-full bg-fuchsia-600/18 blur-[130px]"
+          className="animate-blob absolute top-10 right-[-12rem] h-[32rem] w-[32rem] rounded-full bg-teal-400/[0.12] blur-[130px]"
           style={{ animationDelay: "-6s" }}
         />
         <div
-          className="animate-blob absolute bottom-[-14rem] left-[-8rem] h-[28rem] w-[28rem] rounded-full bg-cyan-500/12 blur-[120px]"
+          className="animate-blob absolute bottom-[-14rem] left-[-8rem] h-[28rem] w-[28rem] rounded-full bg-lime-300/[0.09] blur-[120px]"
           style={{ animationDelay: "-11s" }}
         />
         {/* top hairline glow */}
-        <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-violet-400/60 to-transparent" />
+        <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-lime-300/70 to-transparent" />
       </div>
 
       <div className="relative mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-16 px-5 sm:px-8 lg:grid-cols-[1.05fr_0.95fr] lg:gap-10">
@@ -79,7 +101,7 @@ export default function Hero() {
             <span className="hidden text-emerald-300/60 sm:inline">·</span>
             <a
               href="#contact"
-              className="hidden text-[13px] font-semibold text-emerald-200 underline-offset-4 transition hover:underline sm:inline"
+              className="hidden text-[13px] font-semibold text-lime-200 underline-offset-4 transition hover:text-lime-100 hover:underline sm:inline"
             >
               mdaadilansari248@gmail.com · 9871814324
    
@@ -117,7 +139,7 @@ export default function Hero() {
               <ArrowRight className="h-4.5 w-4.5 transition-transform duration-300 group-hover:translate-x-1" />
             </ButtonLink>
             <ButtonLink href="#work" variant="ghost" size="lg">
-              <span className="flex h-7 w-7 items-center justify-center rounded-full bg-white/10 transition-colors group-hover:bg-violet-500/30">
+              <span className="flex h-7 w-7 items-center justify-center rounded-full bg-white/10 transition-colors group-hover:bg-lime-400/25">
                 <Play className="ml-0.5 h-3 w-3 fill-current" />
               </span>
               See my work
@@ -153,7 +175,10 @@ export default function Hero() {
         </div>
 
         {/* ================= visual ================= */}
-        <div className="relative mx-auto w-full max-w-md lg:max-w-none">
+        <div
+          className="relative mx-auto w-full max-w-md will-change-transform lg:max-w-none"
+          style={{ transform: `translate3d(0, ${scrollY * -0.045}px, 0)` }}
+        >
           <div
             className="animate-rise relative"
             style={{ animationDelay: "220ms" }}
@@ -164,12 +189,12 @@ export default function Hero() {
               className="absolute -inset-8 -z-10 rounded-full opacity-60 blur-2xl"
               style={{
                 background:
-                  "radial-gradient(closest-side, rgba(139,92,246,0.35), rgba(34,211,238,0.12), transparent)",
+                  "radial-gradient(closest-side, rgba(198,248,6,0.32), rgba(47,227,184,0.14), transparent)",
               }}
             />
             {/* portrait */}
-            <figure className="group relative overflow-hidden rounded-[2rem] border border-white/10 shadow-[0_30px_80px_-20px_rgba(0,0,0,0.8)]">
-              <div className="aspect-[4/5] w-full overflow-hidden">
+            <figure className="glass-panel group relative overflow-hidden rounded-[2.2rem] p-2.5 transition-transform duration-700 hover:-translate-y-1">
+              <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[1.7rem] ring-1 ring-white/10">
                 <AadilPhoto
                   alt="Md Aadil Ansari — real photo, exactly as-is"
                   className="h-full w-full object-cover object-[40%_30%] transition-transform duration-[1.4s] ease-out group-hover:scale-[1.04]"
@@ -178,9 +203,10 @@ export default function Hero() {
                   loading="eager"
                 />
               </div>
-              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-base-950/70 via-transparent to-base-950/20" />
+              <div className="pointer-events-none absolute inset-2.5 rounded-[1.7rem] bg-gradient-to-t from-base-950/80 via-transparent to-base-950/10" />
+              <div className="pointer-events-none absolute inset-2.5 rounded-[1.7rem] bg-[linear-gradient(120deg,rgba(255,255,255,0.18),transparent_38%,transparent_72%,rgba(198,248,6,0.10))] mix-blend-overlay" />
               {/* glass footer card */}
-              <figcaption className="glass-strong absolute inset-x-4 bottom-4 flex items-center justify-between rounded-2xl px-4 py-3.5">
+              <figcaption className="glass-strong absolute inset-x-5 bottom-5 flex items-center justify-between rounded-2xl px-4 py-3.5">
                 <div className="flex items-center gap-3">
                   <span className="relative flex h-2.5 w-2.5">
                     <span className="absolute h-full w-full animate-ping rounded-full bg-emerald-400 opacity-60" />
@@ -193,7 +219,7 @@ export default function Hero() {
                     </p>
                   </div>
                 </div>
-                <BadgeCheck className="h-6 w-6 text-violet-300" />
+                <BadgeCheck className="h-6 w-6 text-lime-300 drop-shadow-[0_0_10px_rgba(198,248,6,0.6)]" />
               </figcaption>
             </figure>
 
@@ -248,8 +274,8 @@ export default function Hero() {
                   </textPath>
                 </text>
               </svg>
-              <span className="relative flex h-11 w-11 items-center justify-center rounded-full bg-gradient-to-br from-violet-500 to-fuchsia-500 shadow-lg shadow-fuchsia-900/50">
-                <Star className="h-5 w-5 fill-white text-white" />
+              <span className="relative flex h-11 w-11 items-center justify-center rounded-full bg-gradient-to-br from-lime-200 to-teal-400 shadow-[inset_0_1px_0_rgba(255,255,255,0.7),0_10px_30px_-8px_rgba(198,248,6,0.7)]">
+                <Star className="h-5 w-5 fill-base-950 text-base-950" />
               </span>
             </div>
           </div>

@@ -50,10 +50,8 @@ function FaqItem({
     <Reveal delay={index * 60}>
       <div
         className={cn(
-          "overflow-hidden rounded-2xl border transition-all duration-400",
-          open
-            ? "border-violet-400/25 bg-violet-500/[0.05]"
-            : "border-white/[0.08] bg-white/[0.03] hover:border-white/[0.16]"
+          "glass-card overflow-hidden rounded-2xl",
+          open && "is-open border-lime-400/35"
         )}
       >
         <h3>
@@ -70,8 +68,8 @@ function FaqItem({
               className={cn(
                 "flex h-8 w-8 shrink-0 items-center justify-center rounded-full border transition-all duration-400",
                 open
-                  ? "rotate-45 border-violet-400/40 bg-violet-500/20 text-violet-200"
-                  : "border-white/10 bg-white/[0.04] text-zinc-400"
+                  ? "rotate-45 border-lime-300/60 bg-lime-400/20 text-lime-200 shadow-[0_0_20px_-6px_rgba(198,248,6,0.8)]"
+                  : "border-white/15 bg-white/[0.05] text-zinc-400"
               )}
             >
               <Plus className="h-4 w-4" />
@@ -126,7 +124,7 @@ export default function FAQ() {
 
         <Reveal delay={200} className="mt-10 text-center">
           <ButtonLink href="#contact" variant="ghost">
-            <MessageCircle className="h-4.5 w-4.5 text-violet-300" />
+            <MessageCircle className="h-4.5 w-4.5 text-lime-300" />
             Still curious? Ask me anything
           </ButtonLink>
         </Reveal>

@@ -33,9 +33,9 @@ const SKILLS: Skill[] = [
       "SEO, analytics & headless CMS baked in",
       "Motion design & micro-interactions that wow",
     ],
-    gradient: "from-indigo-500 via-violet-500 to-purple-500",
-    glow: "group-hover:shadow-indigo-500/25",
-    accent: "text-violet-300",
+    gradient: "from-lime-200 via-lime-400 to-teal-400",
+    glow: "group-hover:shadow-lime-500/25",
+    accent: "text-lime-300",
   },
   {
     icon: Smartphone,
@@ -49,9 +49,9 @@ const SKILLS: Skill[] = [
       "App Store & Play Store launch handling",
       "Push, analytics & offline-first architecture",
     ],
-    gradient: "from-fuchsia-500 via-pink-500 to-rose-500",
-    glow: "group-hover:shadow-fuchsia-500/25",
-    accent: "text-fuchsia-300",
+    gradient: "from-teal-200 via-teal-300 to-emerald-400",
+    glow: "group-hover:shadow-lime-500/25",
+    accent: "text-teal-300",
   },
   {
     icon: Wand2,
@@ -65,9 +65,9 @@ const SKILLS: Skill[] = [
       "Custom ChatGPT copilots & automation agents",
       "Content engines for teams & creators",
     ],
-    gradient: "from-cyan-400 via-sky-500 to-blue-600",
-    glow: "group-hover:shadow-cyan-400/20",
-    accent: "text-cyan-300",
+    gradient: "from-lime-200 via-lime-300 to-teal-300",
+    glow: "group-hover:shadow-teal-400/20",
+    accent: "text-teal-300",
   },
 ];
 
@@ -95,7 +95,11 @@ const TECH = [
 export default function Skills() {
   return (
     <section id="skills" className="relative scroll-mt-24 py-20 sm:py-28">
-      <div className="mx-auto max-w-7xl px-5 sm:px-8">
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute top-1/4 -right-32 h-80 w-80 rounded-full bg-lime-400/[0.09] blur-[130px]"
+      />
+      <div className="relative mx-auto max-w-7xl px-5 sm:px-8">
         <SectionHeading
           eyebrow="What I do"
           title={
@@ -110,7 +114,7 @@ export default function Skills() {
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
           {SKILLS.map((skill, i) => (
             <Reveal key={skill.title} delay={i * 120} className="h-full">
-              <SpotlightCard className="group relative flex h-full flex-col overflow-hidden rounded-[1.75rem] border border-white/[0.08] bg-white/[0.03] p-8 transition-all duration-500 hover:-translate-y-1.5 hover:border-white/[0.16] hover:bg-white/[0.05]">
+              <SpotlightCard className="glass-card group relative flex h-full flex-col overflow-hidden rounded-[1.75rem] p-8">
                 {/* gradient top glow */}
                 <div
                   aria-hidden="true"
@@ -118,9 +122,9 @@ export default function Skills() {
                 />
                 <div
                   aria-hidden="true"
-                  className={`mb-7 inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br ${skill.gradient} shadow-xl shadow-black/30 ring-1 ring-white/20 transition-transform duration-500 group-hover:scale-110 group-hover:-rotate-6`}
+                  className={`mb-7 inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br ${skill.gradient} shadow-[inset_0_1px_0_rgba(255,255,255,0.65),0_16px_36px_-14px_rgba(198,248,6,0.55)] ring-1 ring-white/30 transition-transform duration-500 group-hover:scale-110 group-hover:-rotate-6`}
                 >
-                  <skill.icon className="h-7 w-7 text-white" strokeWidth={1.9} />
+                  <skill.icon className="h-7 w-7 text-base-950" strokeWidth={1.9} />
                 </div>
 
                 <p className="font-mono text-[11px] font-medium tracking-[0.25em] text-zinc-500 uppercase">
@@ -139,7 +143,7 @@ export default function Skills() {
                       <span
                         className={`mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-gradient-to-br ${skill.gradient} opacity-90`}
                       >
-                        <Check className="h-3 w-3 text-white" strokeWidth={3} />
+                        <Check className="h-3 w-3 text-base-950" strokeWidth={3.2} />
                       </span>
                       {b}
                     </li>
@@ -161,16 +165,16 @@ export default function Skills() {
 
       {/* tech marquee */}
       <Reveal delay={150} className="relative mt-16 sm:mt-20">
-        <div className="marquee-group mask-fade-x overflow-hidden border-y border-white/[0.06] bg-white/[0.02] py-5">
+        <div className="marquee-group mask-fade-x overflow-hidden border-y border-white/[0.07] bg-white/[0.025] py-5 backdrop-blur-xl">
           <div className="animate-marquee-slow flex w-max items-center">
             {[0, 1].map((copy) => (
               <div key={copy} aria-hidden={copy === 1} className="flex items-center gap-3 pr-3">
                 {TECH.map((tech) => (
                   <span
                     key={tech}
-                    className="flex items-center gap-3 rounded-full border border-white/[0.07] bg-white/[0.03] px-5 py-2 font-mono text-[13px] whitespace-nowrap text-zinc-400 transition-colors duration-300 hover:border-violet-400/30 hover:text-violet-200"
+                    className="flex items-center gap-3 rounded-full border border-white/[0.07] bg-white/[0.03] px-5 py-2 font-mono text-[13px] whitespace-nowrap text-zinc-400 transition-colors duration-300 hover:border-lime-400/30 hover:text-lime-200"
                   >
-                    <span className="h-1.5 w-1.5 rounded-full bg-gradient-to-r from-violet-400 to-fuchsia-400" />
+                    <span className="h-1.5 w-1.5 rounded-full bg-gradient-to-r from-lime-300 to-teal-300" />
                     {tech}
                   </span>
                 ))}

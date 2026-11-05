@@ -27,6 +27,90 @@ const OWNER_EMAIL = "mdaadilansari248@gmail.com";
 const OWNER_PHONE_DISPLAY = "9871814324";
 const OWNER_PHONE_TEL = "+919871814324";
 const ENDPOINT = `https://formsubmit.co/ajax/${OWNER_EMAIL}`;
+const FORM_POST_ENDPOINT = `https://formsubmit.co/${OWNER_EMAIL}`;
+
+/**
+ * Primary transport: FormSubmit's JSON API.
+ * It can fail with "Failed to fetch" when a browser, ad-blocker or privacy
+ * extension blocks the cross-origin request — callers must handle that.
+ */
+async function sendViaAjax(fields: Record<string, string>) {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), 12000);
+  try {
+    const res = await fetch(ENDPOINT, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", Accept: "application/json" },
+      body: JSON.stringify(fields),
+      signal: controller.signal,
+    });
+    if (!res.ok) throw new Error(`Server responded with ${res.status}`);
+    const data = await res.json().catch(() => null);
+    if (data && String(data.success) === "false") {
+      throw new Error(data.message || "The form service rejected the request.");
+    }
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
+/**
+ * Fallback transport: a normal HTML form POST into a hidden iframe.
+ * Classic form posts are not subject to CORS, so this still delivers the
+ * brief when fetch() is blocked. We cannot read the cross-origin response,
+ * so we resolve shortly after the iframe finishes navigating.
+ */
+function sendViaIframe(fields: Record<string, string>) {
+  return new Promise<void>((resolve, reject) => {
+    if (typeof navigator !== "undefined" && navigator.onLine === false) {
+      reject(new Error("You appear to be offline."));
+      return;
+    }
+    const frameName = `myskill-form-${Date.now()}`;
+    const iframe = document.createElement("iframe");
+    iframe.name = frameName;
+    iframe.setAttribute("aria-hidden", "true");
+    iframe.style.cssText = "position:absolute;width:0;height:0;border:0;opacity:0;";
+    document.body.appendChild(iframe);
+
+    const form = document.createElement("form");
+    form.method = "POST";
+    form.action = FORM_POST_ENDPOINT;
+    form.target = frameName;
+    form.style.display = "none";
+    Object.entries(fields).forEach(([name, value]) => {
+      const input = document.createElement("input");
+      input.type = "hidden";
+      input.name = name;
+      input.value = value;
+      form.appendChild(input);
+    });
+    document.body.appendChild(form);
+
+    let settled = false;
+    const timers: number[] = [];
+    const finish = (err?: Error) => {
+      if (settled) return;
+      settled = true;
+      timers.forEach((t) => window.clearTimeout(t));
+      window.setTimeout(() => {
+        form.remove();
+        iframe.remove();
+      }, 1000);
+      err ? reject(err) : resolve();
+    };
+
+    iframe.addEventListener("load", () => timers.push(window.setTimeout(() => finish(), 400)));
+    // if the iframe never reports back, assume the post went through
+    timers.push(window.setTimeout(() => finish(), 6000));
+
+    try {
+      form.submit();
+    } catch {
+      finish(new Error("Could not submit the form."));
+    }
+  });
+}
 
 type Status = "idle" | "sending" | "sent" | "error";
 
@@ -69,7 +153,7 @@ function Field({
         htmlFor={id}
         className="flex items-center gap-1.5 font-mono text-[11px] font-medium tracking-[0.18em] text-zinc-400 uppercase"
       >
-        <Icon className="h-3.5 w-3.5 text-violet-300" aria-hidden="true" />
+        <Icon className="h-3.5 w-3.5 text-lime-300" aria-hidden="true" />
         {label}
       </label>
       {children}
@@ -79,7 +163,7 @@ function Field({
 }
 
 const inputCls =
-  "w-full rounded-xl border border-white/10 bg-white/[0.06] px-4 py-3 text-[15px] text-white placeholder-zinc-500 transition-colors duration-200 focus:border-violet-400/60 focus:bg-white/[0.09] focus:outline-none";
+  "field-glass w-full rounded-xl px-4 py-3 text-[15px] text-white placeholder:text-white/30";
 
 export default function CTA() {
   const [form, setForm] = useState<FormState>(EMPTY);
@@ -104,46 +188,52 @@ export default function CTA() {
     e.preventDefault();
     setStatus("sending");
     setErrorMsg("");
+
+    const fields: Record<string, string> = {
+      _subject: `New project request — ${form.service} — ${form.name}`,
+      _template: "table",
+      _captcha: "false",
+      Name: form.name,
+      Email: form.email,
+      "Phone / WhatsApp": form.phone || "—",
+      "Service needed": form.service,
+      Budget: form.budget || "—",
+      "Project details": form.message || "—",
+      Source: "MySkill landing page",
+    };
+
     try {
-      const res = await fetch(ENDPOINT, {
-        method: "POST",
-        headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify({
-          _subject: `New project request — ${form.service} — ${form.name}`,
-          _template: "table",
-          _captcha: "false",
-          Name: form.name,
-          Email: form.email,
-          "Phone / WhatsApp": form.phone || "—",
-          "Service needed": form.service,
-          Budget: form.budget || "—",
-          "Project details": form.message || "—",
-          Source: "MySkill landing page",
-        }),
-      });
-      if (!res.ok) throw new Error(`Server responded with ${res.status}`);
+      await sendViaAjax(fields);
       setStatus("sent");
-    } catch (err) {
+      return;
+    } catch {
+      // blocked / offline / rate-limited — try the CORS-free fallback
+    }
+
+    try {
+      await sendViaIframe(fields);
+      setStatus("sent");
+    } catch {
       setStatus("error");
-      setErrorMsg(err instanceof Error ? err.message : "Network error — please try again.");
+      setErrorMsg("the request didn't reach the server");
     }
   };
 
   return (
     <section id="contact" className="relative scroll-mt-24 px-5 py-20 sm:px-8 sm:py-28">
       <Reveal dir="scale" className="mx-auto max-w-6xl">
-        <div className="noise relative overflow-hidden rounded-[2.5rem] border border-white/10 px-6 py-16 sm:px-12 sm:py-20">
+        <div className="noise relative overflow-hidden rounded-[2.5rem] border border-white/[0.12] px-6 py-16 shadow-[inset_0_1px_0_rgba(255,255,255,0.2),0_60px_120px_-70px_rgba(198,248,6,0.35)] sm:px-12 sm:py-20">
           {/* animated backdrop */}
           <div aria-hidden="true" className="pointer-events-none absolute inset-0">
             <div className="bg-grid absolute inset-0 opacity-40" />
-            <div className="absolute inset-0 bg-gradient-to-br from-indigo-950 via-base-900 to-fuchsia-950" />
-            <div className="animate-blob absolute -top-32 -left-24 h-96 w-96 rounded-full bg-indigo-500/30 blur-[110px]" />
+            <div className="absolute inset-0 bg-[radial-gradient(125%_125%_at_0%_0%,#0b1409_0%,#050806_46%,#04110f_100%)]" />
+            <div className="animate-blob absolute -top-32 -left-24 h-96 w-96 rounded-full bg-lime-400/[0.20] blur-[110px]" />
             <div
-              className="animate-blob absolute -right-24 -bottom-32 h-96 w-96 rounded-full bg-fuchsia-500/25 blur-[110px]"
+              className="animate-blob absolute -right-24 -bottom-32 h-96 w-96 rounded-full bg-teal-400/[0.16] blur-[110px]"
               style={{ animationDelay: "-8s" }}
             />
             <div
-              className="animate-blob absolute top-1/2 left-1/2 h-72 w-72 -translate-x-1/2 -translate-y-1/2 rounded-full bg-cyan-400/15 blur-[100px]"
+              className="animate-blob absolute top-1/2 left-1/2 h-72 w-72 -translate-x-1/2 -translate-y-1/2 rounded-full bg-lime-300/[0.10] blur-[100px]"
               style={{ animationDelay: "-14s" }}
             />
             <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent" />
@@ -177,7 +267,7 @@ export default function CTA() {
               >
                 <a
                   href={`mailto:${OWNER_EMAIL}`}
-                  className="inline-flex items-center gap-2 transition-colors hover:text-violet-300"
+                  className="inline-flex items-center gap-2 transition-colors hover:text-lime-300"
                 >
                   <Mail className="h-3.5 w-3.5" aria-hidden="true" />
                   {OWNER_EMAIL}
@@ -187,7 +277,7 @@ export default function CTA() {
                 </span>
                 <a
                   href={`tel:${OWNER_PHONE_TEL}`}
-                  className="inline-flex items-center gap-2 transition-colors hover:text-violet-300"
+                  className="inline-flex items-center gap-2 transition-colors hover:text-lime-300"
                 >
                   <Phone className="h-3.5 w-3.5" aria-hidden="true" />
                   {OWNER_PHONE_DISPLAY}
@@ -201,10 +291,10 @@ export default function CTA() {
                 <div
                   role="status"
                   aria-live="polite"
-                  className="glass mx-auto flex max-w-xl flex-col items-center gap-3 rounded-3xl px-8 py-10 text-center"
+                  className="glass-panel mx-auto flex max-w-xl flex-col items-center gap-3 rounded-3xl px-8 py-10 text-center"
                 >
-                  <span className="flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-emerald-400 to-teal-500 shadow-lg shadow-emerald-900/50">
-                    <CheckCircle2 className="h-7 w-7 text-white" />
+                  <span className="flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-lime-200 via-lime-400 to-teal-400 shadow-[inset_0_1px_0_rgba(255,255,255,0.7),0_16px_40px_-14px_rgba(198,248,6,0.7)]">
+                    <CheckCircle2 className="h-7 w-7 text-base-950" />
                   </span>
                   <p className="font-display text-xl font-semibold text-white">
                     Request received — thank you, {form.name.split(" ")[0] || "friend"}!
@@ -255,7 +345,7 @@ export default function CTA() {
                 <form
                   onSubmit={onSubmit}
                   noValidate={false}
-                  className="glass-strong rounded-[1.75rem] p-6 sm:p-8"
+                  className="glass-panel rounded-[1.75rem] p-6 sm:p-8"
                 >
                   <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
                     <Field id="f-name" label="Your name" icon={User}>
@@ -356,7 +446,7 @@ export default function CTA() {
                   {status === "error" ? (
                     <div
                       role="alert"
-                      className="mt-5 flex flex-col gap-3 rounded-xl border border-rose-400/30 bg-rose-500/10 px-4 py-3.5 sm:flex-row sm:items-center sm:justify-between"
+                      className="mt-5 flex flex-col gap-3 rounded-2xl border border-rose-400/30 bg-rose-500/[0.09] px-4 py-3.5 backdrop-blur-xl sm:flex-row sm:items-center sm:justify-between"
                     >
                       <p className="flex items-start gap-2.5 text-[13.5px] leading-relaxed text-rose-200">
                         <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0" aria-hidden="true" />
@@ -381,7 +471,7 @@ export default function CTA() {
                     <button
                       type="submit"
                       disabled={status === "sending"}
-                      className="btn-3d btn-shine group inline-flex w-full items-center justify-center gap-2 rounded-full px-8 py-3.5 text-[15px] font-semibold text-white disabled:cursor-wait disabled:opacity-70 sm:w-auto"
+                      className="btn-3d btn-shine group inline-flex w-full items-center justify-center gap-2 rounded-full px-8 py-3.5 text-[15px] font-bold disabled:cursor-wait disabled:opacity-70 sm:w-auto"
                     >
                       {status === "sending" ? (
                         <>

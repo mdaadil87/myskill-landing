@@ -20,7 +20,7 @@ const TIERS: Tier[] = [
     price: "₹999",
     priceNote: "one-time · 7-day delivery",
     cta: "Start a sprint",
-    accent: "from-cyan-400 to-sky-500",
+    accent: "from-lime-200 to-lime-500",
     features: [
       "Conversion-focused landing page (up to 5 sections)",
       "Mobile-first, 90+ Lighthouse performance",
@@ -37,7 +37,7 @@ const TIERS: Tier[] = [
     priceNote: "from · typical 2–6 week build",
     cta: "Book a free intro call",
     popular: true,
-    accent: "from-indigo-500 via-violet-500 to-fuchsia-500",
+    accent: "from-lime-200 via-lime-400 to-teal-400",
     features: [
       "Custom website, web app OR mobile app MVP",
       "UX design + high-fidelity UI included",
@@ -53,7 +53,7 @@ const TIERS: Tier[] = [
     price: "Custom",
     priceNote: "monthly engagement · pause anytime",
     cta: "Let's talk",
-    accent: "from-fuchsia-500 to-pink-500",
+    accent: "from-teal-300 to-emerald-400",
     features: [
       "Dedicated monthly development sprints",
       "Continuous AI editing & automation ops",
@@ -70,7 +70,7 @@ export default function Pricing() {
     <section id="pricing" className="relative scroll-mt-24 py-20 sm:py-28">
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute top-1/4 left-1/2 h-[30rem] w-[30rem] -translate-x-1/2 rounded-full bg-violet-600/[0.09] blur-[150px]"
+        className="pointer-events-none absolute top-1/4 left-1/2 h-[30rem] w-[30rem] -translate-x-1/2 rounded-full bg-lime-400/[0.09] blur-[150px]"
       />
 
       <div className="relative mx-auto max-w-7xl px-5 sm:px-8">
@@ -88,10 +88,8 @@ export default function Pricing() {
           {TIERS.map((tier, i) => (
             <Reveal key={tier.name} delay={i * 130} className="h-full">
               <article
-                className={`relative flex h-full flex-col rounded-[1.9rem] p-8 transition-all duration-500 hover:-translate-y-2 ${
-                  tier.popular
-                    ? "border border-violet-400/40 bg-gradient-to-b from-violet-500/[0.12] via-white/[0.04] to-white/[0.02] shadow-[0_20px_80px_-20px_rgba(139,92,246,0.45)] lg:scale-[1.04]"
-                    : "border border-white/[0.08] bg-white/[0.03] hover:border-white/[0.16]"
+                className={`relative flex h-full flex-col rounded-[1.9rem] p-8 ${
+                  tier.popular ? "glass-panel lg:scale-[1.04]" : "glass-card"
                 }`}
               >
                 {tier.popular && (
@@ -101,7 +99,7 @@ export default function Pricing() {
                       aria-hidden="true"
                       className="ring-conic animate-orbit absolute -inset-px -z-10 rounded-[1.9rem] opacity-40 blur-[6px]"
                     />
-                    <span className="absolute -top-3.5 left-1/2 inline-flex -translate-x-1/2 items-center gap-1.5 rounded-full bg-gradient-to-r from-indigo-500 to-fuchsia-500 px-4 py-1.5 text-[11px] font-bold tracking-wider whitespace-nowrap text-white uppercase shadow-lg shadow-fuchsia-900/50">
+                    <span className="absolute -top-3.5 left-1/2 inline-flex -translate-x-1/2 items-center gap-1.5 rounded-full bg-gradient-to-r from-lime-200 via-lime-300 to-teal-300 px-4 py-1.5 text-[11px] font-bold tracking-wider whitespace-nowrap text-base-950 uppercase shadow-[inset_0_1px_0_rgba(255,255,255,0.6),0_10px_30px_-10px_rgba(198,248,6,0.8)]">
                       <Sparkles className="h-3.5 w-3.5" />
                       Most popular
                     </span>
@@ -114,7 +112,7 @@ export default function Pricing() {
                 </p>
 
                 <div className="mt-6 flex items-end gap-2">
-                  <span className="font-display bg-gradient-to-b from-white to-zinc-400 bg-clip-text text-5xl font-bold tracking-tight text-transparent">
+                  <span className="font-display bg-gradient-to-b from-white via-lime-100 to-zinc-500 bg-clip-text text-5xl font-bold tracking-[-0.03em] text-transparent">
                     {tier.price}
                   </span>
                 </div>
@@ -129,13 +127,13 @@ export default function Pricing() {
                   <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
                 </ButtonLink>
 
-                <ul className="mt-8 space-y-3.5 border-t border-white/[0.07] pt-7">
+                <ul className="mt-8 space-y-3.5 border-t border-white/[0.09] pt-7">
                   {tier.features.map((f) => (
                     <li key={f} className="flex items-start gap-3 text-[14.5px] text-zinc-300">
                       <span
                         className={`mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-gradient-to-br ${tier.accent}`}
                       >
-                        <Check className="h-3 w-3 text-white" strokeWidth={3} />
+                        <Check className="h-3 w-3 text-base-950" strokeWidth={3.2} />
                       </span>
                       {f}
                     </li>
@@ -148,7 +146,7 @@ export default function Pricing() {
 
         {/* guarantee */}
         <Reveal delay={200} className="mt-14">
-          <div className="glass flex flex-col items-center gap-4 rounded-3xl px-8 py-7 text-center sm:flex-row sm:text-left">
+          <div className="glass-panel flex flex-col items-center gap-4 rounded-3xl px-8 py-7 text-center sm:flex-row sm:text-left">
             <span className="flex h-13 w-13 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-emerald-400 to-teal-500 shadow-lg shadow-emerald-900/40">
               <ShieldCheck className="h-6.5 w-6.5 text-white" />
             </span>

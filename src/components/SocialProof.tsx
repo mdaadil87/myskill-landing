@@ -118,9 +118,9 @@ export default function SocialProof() {
             <Reveal
               key={stat.label}
               delay={i * 90}
-              className="group relative overflow-hidden rounded-3xl border border-white/[0.07] bg-white/[0.03] p-6 text-center transition-colors duration-300 hover:border-violet-400/25 sm:p-8"
+              className="glass-card group relative overflow-hidden rounded-3xl p-6 text-center sm:p-8"
             >
-              <div className="pointer-events-none absolute -top-16 left-1/2 h-24 w-24 -translate-x-1/2 rounded-full bg-violet-500/10 blur-2xl transition-opacity duration-300 group-hover:opacity-100 sm:opacity-0" />
+              <div className="pointer-events-none absolute -top-16 left-1/2 h-24 w-24 -translate-x-1/2 rounded-full bg-lime-400/20 blur-2xl transition-opacity duration-300 group-hover:opacity-100 sm:opacity-0" />
               <p className="font-display bg-gradient-to-b from-white to-zinc-400 bg-clip-text text-4xl font-bold tracking-tight text-transparent sm:text-5xl">
                 <CountUp to={stat.value} suffix={stat.suffix} />
               </p>
