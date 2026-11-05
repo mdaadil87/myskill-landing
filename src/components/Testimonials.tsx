@@ -47,7 +47,7 @@ export default function Testimonials() {
     <section id="results" className="relative scroll-mt-24 py-20 sm:py-28">
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute top-10 -left-32 h-80 w-80 rounded-full bg-fuchsia-600/[0.08] blur-[120px]"
+        className="pointer-events-none absolute top-10 -left-32 h-80 w-80 rounded-full bg-teal-400/[0.10] blur-[120px]"
       />
 
       <div className="relative mx-auto max-w-7xl px-5 sm:px-8">
@@ -63,7 +63,7 @@ export default function Testimonials() {
 
         {/* rating summary */}
         <Reveal className="-mt-6 mb-12 flex justify-center sm:-mt-8 sm:mb-14">
-          <div className="glass inline-flex flex-wrap items-center justify-center gap-x-4 gap-y-2 rounded-2xl px-6 py-3.5">
+          <div className="glass-panel inline-flex flex-wrap items-center justify-center gap-x-4 gap-y-2 rounded-2xl px-6 py-3.5">
             <Stars />
             <span className="font-display text-lg font-bold text-white">4.9 / 5</span>
             <span className="h-4 w-px bg-white/15" aria-hidden="true" />
@@ -82,15 +82,13 @@ export default function Testimonials() {
               className={t.featured ? "sm:col-span-2 lg:col-span-1" : ""}
             >
               <figure
-                className={`group relative flex h-full flex-col overflow-hidden rounded-[1.6rem] border border-white/[0.08] bg-white/[0.03] p-7 transition-all duration-500 hover:-translate-y-1.5 hover:border-violet-400/25 hover:bg-white/[0.05] hover:shadow-2xl hover:shadow-violet-950/30 ${
-                  t.featured
-                    ? "border-violet-400/20 bg-gradient-to-b from-violet-500/[0.07] to-transparent"
-                    : ""
+                className={`glass-card group relative flex h-full flex-col overflow-hidden rounded-[1.6rem] p-7 ${
+                  t.featured ? "glass-panel" : ""
                 }`}
               >
                 <Quote
                   aria-hidden="true"
-                  className="absolute top-6 right-6 h-8 w-8 text-white/[0.06] transition-colors duration-500 group-hover:text-violet-400/20"
+                  className="absolute top-6 right-6 h-8 w-8 text-white/[0.07] transition-colors duration-500 group-hover:text-lime-400/30"
                 />
                 <Stars className="mb-4" />
                 <blockquote

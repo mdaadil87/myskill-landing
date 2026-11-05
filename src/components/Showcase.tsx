@@ -104,7 +104,7 @@ export default function Showcase() {
       {/* ambient */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute top-1/3 -left-40 h-96 w-96 rounded-full bg-violet-600/10 blur-[130px]"
+        className="pointer-events-none absolute top-1/3 -left-40 h-96 w-96 rounded-full bg-lime-400/[0.12] blur-[130px]"
       />
 
       <div className="relative mx-auto max-w-7xl px-5 sm:px-8">
@@ -120,7 +120,7 @@ export default function Showcase() {
 
         {/* filters */}
         <Reveal className="mb-10 flex flex-wrap justify-center gap-2">
-          <div className="glass flex flex-wrap items-center justify-center gap-1 rounded-full p-1.5">
+          <div className="glass flex flex-wrap items-center justify-center gap-1 rounded-full p-1.5 shadow-[inset_0_1px_0_rgba(255,255,255,0.2),0_20px_50px_-30px_rgba(0,0,0,1)]">
             {FILTERS.map((f) => (
               <button
                 key={f}
@@ -130,7 +130,7 @@ export default function Showcase() {
                 className={cn(
                   "relative rounded-full px-5 py-2 text-sm font-medium transition-all duration-300",
                   active === f
-                    ? "bg-gradient-to-r from-indigo-500 to-fuchsia-500 text-white shadow-lg shadow-violet-900/40"
+                    ? "btn-3d text-base-950"
                     : "text-zinc-400 hover:text-white"
                 )}
               >
@@ -145,7 +145,7 @@ export default function Showcase() {
           {filtered.map((p, i) => (
             <article
               key={p.id}
-              className="animate-pop group relative overflow-hidden rounded-[1.6rem] border border-white/[0.08] bg-white/[0.03] transition-all duration-500 hover:-translate-y-1.5 hover:border-white/[0.18] hover:shadow-2xl hover:shadow-violet-950/40"
+              className="glass-card animate-pop group relative overflow-hidden rounded-[1.6rem]"
               style={{ animationDelay: `${i * 80}ms` }}
             >
               <a
@@ -187,7 +187,7 @@ export default function Showcase() {
                 </div>
 
                 <div className="flex flex-1 flex-col p-6">
-                  <h3 className="font-display text-xl font-semibold text-white transition-colors duration-300 group-hover:text-violet-200">
+                  <h3 className="font-display text-xl font-semibold text-white transition-colors duration-300 group-hover:text-lime-200">
                     {p.title}
                   </h3>
                   <p className="mt-2 flex-1 text-[14.5px] leading-relaxed text-zinc-400">
@@ -214,7 +214,7 @@ export default function Showcase() {
             Want results like these?{" "}
             <a
               href="#contact"
-              className="font-semibold text-violet-300 underline-offset-4 transition hover:text-violet-200 hover:underline"
+              className="font-semibold text-lime-300 underline-offset-4 transition hover:text-lime-200 hover:underline"
             >
               Let&apos;s talk about your project →
             </a>

@@ -1,5 +1,5 @@
 import type { SVGProps } from "react";
-import { ArrowUp, Mail, Sparkles } from "lucide-react";
+import { ArrowUp, Mail, Phone, Sparkles } from "lucide-react";
 import { ButtonLink } from "@/components/ui";
 
 type IconProps = SVGProps<SVGSVGElement>;
@@ -72,17 +72,17 @@ const SOCIALS = [
 
 export default function Footer() {
   return (
-    <footer className="relative overflow-hidden border-t border-white/[0.06]">
+    <footer className="relative overflow-hidden border-t border-white/[0.08] bg-gradient-to-b from-white/[0.02] to-transparent backdrop-blur-xl">
       <div className="mx-auto max-w-7xl px-5 pt-16 pb-10 sm:px-8 sm:pt-20">
         <div className="grid grid-cols-2 gap-x-6 gap-y-12 md:grid-cols-[1.4fr_1fr_1fr_1.2fr]">
           {/* brand */}
           <div className="col-span-2 md:col-span-1">
             <a href="#top" className="flex items-center gap-2.5" aria-label="MySkill home">
-              <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-indigo-500 via-violet-500 to-fuchsia-500 shadow-[0_6px_20px_-4px_rgba(139,92,246,0.6)]">
-                <Sparkles className="h-4.5 w-4.5 text-white" strokeWidth={2.2} />
+              <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-lime-200 via-lime-400 to-teal-400 shadow-[inset_0_1px_0_rgba(255,255,255,0.7),0_8px_24px_-6px_rgba(198,248,6,0.5)]">
+                <Sparkles className="h-4.5 w-4.5 text-base-950" strokeWidth={2.2} />
               </span>
               <span className="font-display text-lg font-semibold tracking-tight text-white">
-                MySkill<span className="text-violet-400">.</span>
+                MySkill<span className="text-lime-400">.</span>
               </span>
             </a>
             <p className="mt-5 max-w-xs text-[14.5px] leading-relaxed text-zinc-400">
@@ -98,7 +98,7 @@ export default function Footer() {
                   target="_blank"
                   rel="noreferrer"
                   aria-label={label}
-                  className="glass flex h-10 w-10 items-center justify-center rounded-full text-zinc-400 transition-all duration-300 hover:-translate-y-1 hover:border-violet-400/40 hover:text-white"
+                  className="btn-glass flex h-10 w-10 items-center justify-center rounded-full text-zinc-300"
                 >
                   <Icon className="h-4.5 w-4.5" />
                 </a>
@@ -118,7 +118,7 @@ export default function Footer() {
                     href={l.href}
                     className="group inline-flex items-center gap-2 text-[14.5px] text-zinc-400 transition-colors hover:text-white"
                   >
-                    <span className="h-px w-0 bg-gradient-to-r from-violet-400 to-fuchsia-400 transition-all duration-300 group-hover:w-4" />
+                    <span className="h-px w-0 bg-gradient-to-r from-lime-300 to-teal-300 transition-all duration-300 group-hover:w-4" />
                     {l.label}
                   </a>
                 </li>
@@ -138,7 +138,7 @@ export default function Footer() {
                     href={l.href}
                     className="group inline-flex items-center gap-2 text-[14.5px] text-zinc-400 transition-colors hover:text-white"
                   >
-                    <span className="h-px w-0 bg-gradient-to-r from-violet-400 to-fuchsia-400 transition-all duration-300 group-hover:w-4" />
+                    <span className="h-px w-0 bg-gradient-to-r from-lime-300 to-teal-300 transition-all duration-300 group-hover:w-4" />
                     {l.label}
                   </a>
                 </li>
@@ -153,22 +153,27 @@ export default function Footer() {
             </p>
             <a
               href="mailto:mdaadilansari248@gmail.com"
-              className="mt-5 inline-flex items-center gap-2.5 text-[15px] font-medium text-zinc-200 transition-colors hover:text-violet-300"
+              className="mt-5 inline-flex items-center gap-2.5 text-[15px] font-medium text-zinc-200 transition-colors hover:text-lime-200"
             >
-              <Mail className="h-4.5 w-4.5 text-violet-400" />
+              <Mail className="h-4.5 w-4.5 text-lime-400" />
               mdaadilansari248@gmail.com
             </a>
-            <a href="tel:+919871814324" className="mt-2 inline-flex items-center gap-2 text-sm text-zinc-500 transition-colors hover:text-zinc-300" aria-label="Call Md Aadil Ansari">
-              <span aria-hidden="true">☎</span> 9871814324
-              <a
-  href="https://www.instagram.com/dr_aadil_ansari"
-  target="_blank"
-  rel="noreferrer"
-  className="mt-2 inline-flex items-center gap-2 text-sm text-zinc-500 transition-colors hover:text-fuchsia-300"
->
-  <InstagramIcon className="h-4 w-4" aria-hidden="true" />
-  @dr_aadil_ansari
-</a>
+            <a
+              href="tel:+919871814324"
+              className="mt-2 flex items-center gap-2 text-sm text-zinc-400 transition-colors hover:text-white"
+              aria-label="Call Md Aadil Ansari"
+            >
+              <Phone className="h-4 w-4 text-lime-400" aria-hidden="true" />
+              9871814324
+            </a>
+            <a
+              href="https://www.instagram.com/dr_aadil_ansari"
+              target="_blank"
+              rel="noreferrer"
+              className="mt-2 flex items-center gap-2 text-sm text-zinc-400 transition-colors hover:text-white"
+            >
+              <InstagramIcon className="h-4 w-4 text-lime-400" aria-hidden="true" />
+              @dr_aadil_ansari
             </a>
             <p className="mt-3 font-mono text-xs text-zinc-500">
               Replies within 24 hours · Mon–Sat
@@ -183,7 +188,7 @@ export default function Footer() {
         <div className="mt-16 flex flex-col items-center justify-between gap-5 border-t border-white/[0.06] pt-8 sm:flex-row">
           <p className="text-[13px] text-zinc-500">
             © 2026 MySkill. All rights reserved. Built with{" "}
-            <span className="text-fuchsia-400" aria-hidden="true">
+            <span className="text-teal-400" aria-hidden="true">
               ♥
             </span>{" "}
             and too much coffee.
@@ -193,7 +198,7 @@ export default function Footer() {
             className="group inline-flex items-center gap-2 text-[13px] font-medium text-zinc-400 transition-colors hover:text-white"
           >
             Back to top
-            <span className="flex h-8 w-8 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] transition-all duration-300 group-hover:-translate-y-1 group-hover:border-violet-400/40">
+            <span className="flex h-8 w-8 items-center justify-center rounded-full border border-white/15 bg-white/[0.06] shadow-[inset_0_1px_0_rgba(255,255,255,0.2)] transition-all duration-300 group-hover:-translate-y-1 group-hover:border-lime-300/60 group-hover:text-lime-200">
               <ArrowUp className="h-3.5 w-3.5" />
             </span>
           </a>
@@ -202,7 +207,7 @@ export default function Footer() {
 
       {/* giant watermark wordmark */}
       <div aria-hidden="true" className="pointer-events-none relative -mb-6 select-none overflow-hidden sm:-mb-10">
-        <p className="font-display bg-gradient-to-b from-white/[0.05] to-transparent bg-clip-text text-center text-[24vw] leading-none font-bold tracking-tighter text-transparent">
+        <p className="font-display bg-gradient-to-b from-white/[0.07] via-lime-200/[0.05] to-transparent bg-clip-text text-center text-[24vw] leading-none font-bold tracking-tighter text-transparent">
           MySkill
         </p>
       </div>

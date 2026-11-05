@@ -14,11 +14,11 @@ const NAV_LINKS = [
 function Logo() {
   return (
     <a href="#top" className="group flex items-center gap-2.5" aria-label="MySkill home">
-      <span className="relative inline-flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-indigo-500 via-violet-500 to-fuchsia-500 shadow-[0_6px_20px_-4px_rgba(139,92,246,0.6)] transition-transform duration-300 group-hover:scale-105 group-hover:rotate-3">
-        <Sparkles className="h-4.5 w-4.5 text-white" strokeWidth={2.2} />
+      <span className="relative inline-flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-lime-200 via-lime-400 to-teal-400 shadow-[inset_0_1px_0_rgba(255,255,255,0.7),0_8px_24px_-6px_rgba(198,248,6,0.55)] transition-transform duration-300 group-hover:scale-105 group-hover:rotate-3">
+        <Sparkles className="h-4.5 w-4.5 text-base-950" strokeWidth={2.2} />
       </span>
       <span className="font-display text-lg font-semibold tracking-tight text-white">
-        MySkill<span className="text-violet-400">.</span>
+        MySkill<span className="text-lime-400">.</span>
       </span>
     </a>
   );
@@ -56,14 +56,14 @@ export default function Navbar() {
       className={cn(
         "fixed inset-x-0 top-0 z-50 transition-all duration-500",
         scrolled
-          ? "border-b border-white/[0.06] bg-base-950/75 backdrop-blur-xl"
+          ? "border-b border-white/[0.07] bg-base-950/55 shadow-[0_18px_50px_-30px_rgba(0,0,0,1)] backdrop-blur-2xl backdrop-saturate-150"
           : "border-b border-transparent bg-transparent"
       )}
     >
       {/* scroll progress */}
       <div
         aria-hidden="true"
-        className="absolute inset-x-0 top-0 h-[2px] origin-left bg-gradient-to-r from-indigo-500 via-fuchsia-500 to-cyan-400 transition-transform duration-150"
+        className="absolute inset-x-0 top-0 h-[2px] origin-left bg-gradient-to-r from-lime-300 via-teal-300 to-lime-400 shadow-[0_0_14px_rgba(198,248,6,0.8)] transition-transform duration-150"
         style={{ transform: `scaleX(${progress})` }}
       />
       <nav
@@ -78,7 +78,7 @@ export default function Navbar() {
             <li key={link.href}>
               <a
                 href={link.href}
-                className="relative rounded-full px-4 py-2 text-[14.5px] font-medium text-zinc-400 transition-colors duration-200 hover:text-white after:absolute after:inset-x-4 after:-bottom-px after:h-px after:origin-center after:scale-x-0 after:bg-gradient-to-r after:from-violet-400 after:to-fuchsia-400 after:transition-transform after:duration-300 hover:after:scale-x-100"
+                className="relative rounded-full px-4 py-2 text-[14.5px] font-medium text-zinc-400 transition-colors duration-200 hover:text-white after:absolute after:inset-x-4 after:-bottom-px after:h-px after:origin-center after:scale-x-0 after:bg-gradient-to-r after:from-lime-300 after:to-teal-300 after:shadow-[0_0_10px_rgba(198,248,6,0.8)] after:transition-transform after:duration-300 hover:after:scale-x-100"
               >
                 {link.label}
               </a>
@@ -100,7 +100,7 @@ export default function Navbar() {
             aria-expanded={open}
             aria-controls="mobile-menu"
             aria-label={open ? "Close menu" : "Open menu"}
-            className="glass inline-flex h-10 w-10 items-center justify-center rounded-full text-white transition hover:bg-white/10 lg:hidden"
+            className="btn-glass inline-flex h-10 w-10 items-center justify-center rounded-full text-white lg:hidden"
           >
             {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
@@ -111,7 +111,7 @@ export default function Navbar() {
       <div
         id="mobile-menu"
         className={cn(
-          "fixed inset-x-0 top-[4.5rem] bottom-0 z-40 origin-top bg-base-950/95 backdrop-blur-2xl transition-all duration-300 lg:hidden",
+          "fixed inset-x-0 top-[4.5rem] bottom-0 z-40 origin-top bg-base-950/80 backdrop-blur-2xl transition-all duration-300 lg:hidden",
           open
             ? "pointer-events-auto translate-y-0 opacity-100"
             : "pointer-events-none -translate-y-3 opacity-0"
