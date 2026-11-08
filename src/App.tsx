@@ -1,5 +1,6 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
+import ChatWidget from "@/components/ChatWidget";
 import SocialProof from "@/components/SocialProof";
 import Skills from "@/components/Skills";
 import Showcase from "@/components/Showcase";
@@ -38,6 +39,7 @@ export default function App() {
       </main>
 
       <Footer />
+            <ChatWidget />
     </div>
   );
 }
