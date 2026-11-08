@@ -103,8 +103,10 @@ export default async function handler(req: any, res: any) {
             parts: [{ text: message.content }]
           })),
           generationConfig: {
-            temperature: 0.55,
-            maxOutputTokens: 700
+  thinkingConfig: {
+    thinkingLevel: "low"
+  },
+  maxOutputTokens: 500
           }
         })
       }
