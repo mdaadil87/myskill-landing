@@ -112,7 +112,18 @@ export default async function handler(req: any, res: any) {
       }
     );
 
+    console.log(
+  "[CHAT_TIMING] Gemini response headers:",
+  response.status,
+  Date.now() - geminiStartedAt,
+  "ms"
+);
     const data = await response.json().catch(() => null);
+    console.log(
+  "[CHAT_TIMING] Gemini response body complete:",
+  Date.now() - geminiStartedAt,
+  "ms"
+);
 
     if (!response.ok) {
       console.error(
