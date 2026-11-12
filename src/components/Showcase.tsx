@@ -1,4 +1,4 @@
-,import { useState } from "react";
+import { useState } from "react";
 import { ArrowUpRight, TrendingUp } from "lucide-react";
 import { cn } from "@/utils/cn";
 import Reveal from "@/components/Reveal";
