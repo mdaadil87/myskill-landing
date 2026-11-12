@@ -221,7 +221,7 @@ export default function Showcase() {
 
                   {/* hover CTA */}
                   <span className="absolute inset-x-0 bottom-0 flex translate-y-6 items-center justify-between px-5 pb-4 opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
-                    <span className="text-sm font-semibold text-white">View case study</span>
+                    <span className="text-sm font-semibold text-white">{p.id === "adnan-ai" ? "Download APK" : "View case study"} </span>
                     <span className="flex h-9 w-9 items-center justify-center rounded-full bg-white text-base-950 transition-transform duration-300 group-hover:rotate-45">
                       <ArrowUpRight className="h-4.5 w-4.5" />
                     </span>
