@@ -1,4 +1,4 @@
-import { useState } from "react";
+,import { useState } from "react";
 import { ArrowUpRight, TrendingUp } from "lucide-react";
 import { cn } from "@/utils/cn";
 import Reveal from "@/components/Reveal";
@@ -19,6 +19,30 @@ type Project = {
 };
 
 const PROJECTS: Project[] = [
+    {
+    id: "adnan-ai",
+    title: "Adnan AI",
+    category: "Apps",
+    description:
+      "An Android AI assistant with voice interaction and smart assistant features.",
+    image: "https://drive.google.com/uc?export=view&id=1MMy5z_pT1Kdkv6t_s46NM7incoiXyaYk",
+    tags: ["Android", "Kotlin", "AI Assistant"],
+    metric: "Android app",
+    alt: "Adnan AI app preview",
+    href: "https://drive.google.com/uc?export=download&id=1yYxUuls0lqLp9pPJDBtV_y9pXkTGzkEM",
+  },
+  {
+    id: "interior-carpenter",
+    title: "Interior Carpenter",
+    category: "Websites",
+    description:
+      "A live website showcasing interior carpentry services and work.",
+    image: "https://image.thum.io/get/width/800/crop/600/https://interiorcarpenter.xyz/",
+    tags: ["Website", "Web Design", "Live"],
+    metric: "Live website",
+    alt: "Interior Carpenter website preview",
+    href: "https://interiorcarpenter.xyz/",
+  },
   {
     id: "play-with-aadil",
     title: "Play with Aadil",
