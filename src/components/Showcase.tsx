@@ -12,6 +12,7 @@ type Project = {
   category: Exclude<Category, "All">;
   description: string;
   image: string;
+  gallery?: string[];
   tags: string[];
   metric: string;
   alt: string;
@@ -25,7 +26,11 @@ const PROJECTS: Project[] = [
     category: "Apps",
     description:
       "An Android AI assistant with voice interaction and smart assistant features.",
-    image: "https://drive.google.com/uc?export=view&id=1MMy5z_pT1Kdkv6t_s46NM7incoiXyaYk",
+    image: "/images/adnan-ai-female.jpg",
+gallery: [
+  "/images/adnan-ai-aadil.jpg",
+  "/images/adnan-ai-anime.jpg",
+],
     tags: ["Android", "Kotlin", "AI Assistant"],
     metric: "Android app",
     alt: "Adnan AI app preview",
@@ -188,6 +193,19 @@ export default function Showcase() {
                     height={600}
                     className="h-full w-full object-cover transition-transform duration-[1.1s] ease-out group-hover:scale-[1.07]"
                   />
+                  {p.gallery && (
+  <div className="absolute inset-x-4 bottom-4 z-10 flex gap-2">
+    {p.gallery.map((src) => (
+      <img
+        key={src}
+        src={src}
+        alt={`${p.title} additional preview`}
+        className="h-20 w-16 rounded-xl border border-white/30 object-cover shadow-lg"
+        loading="lazy"
+      />
+    ))}
+  </div>
+)}
                   <div className="absolute inset-0 bg-gradient-to-t from-base-950/85 via-base-950/10 to-transparent" />
 
                   {/* metric chip */}
