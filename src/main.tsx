@@ -1,10 +1,7 @@
-import { StrictMode } from "react";
-import { createRoot } from "react-dom/client";
-import "./index.css";
-import App from "./App";
+import { createRoot } from 'react-dom/client';
+import App from './App';
+import './styles.css';
+import './naruto.css';
 
-createRoot(document.getElementById("root")!).render(
-  <StrictMode>
-    <App />
-  </StrictMode>
-);
+// No StrictMode: several WebGL/GSAP effects lose their contexts when double-mounted in dev.
+createRoot(document.getElementById('root')!).render(<App />);
