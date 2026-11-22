@@ -42,7 +42,7 @@ export default function CurtainOpen({ onReady }: { onReady: () => void }) {
     let dead = false;
     draw();
     onReady();
-    gsap.to('.pl', { opacity: 0, duration: 0.6, onComplete: () => gsap.set('.pl', { display: 'none' }) });
+    gsap.to('.pl', { opacity: 0, duration: 0.6, onComplete: () => { gsap.set('.pl', { display: 'none' }); } });
 
     const cv = dust.current!;
     const ctx = cv.getContext('2d')!;

@@ -23,7 +23,7 @@ export default function Orbit3D() {
           scrollTrigger: { trigger: root.current, start: 'top top', end: '+=420%', scrub: 1, pin: true }
         })
         .fromTo(ring, { scale: 0.35, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.18, ease: 'power2.out' }, 0)
-        .to(rot, { y: 360, duration: 1, onUpdate: () => gsap.set(ring, { rotateY: rot.y }) }, 0)
+        .to(rot, { y: 360, duration: 1, onUpdate: () => { gsap.set(ring, { rotateY: rot.y }); } }, 0)
         .to(ring, { rotateX: -14, duration: 0.5, yoyo: true, repeat: 1 }, 0)
         .to(cube, { rotateX: 540, rotateY: 720, duration: 1 }, 0)
         .fromTo('.orbit__title', { yPercent: 60, opacity: 0 }, { yPercent: 0, opacity: 1, duration: 0.15 }, 0)
