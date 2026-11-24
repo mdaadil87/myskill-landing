@@ -39,7 +39,7 @@ export const projects: Project[] = [
     accent: '#c77dff',
     shot: 'shots/adnan-ai.jpg',
     video: { frames: 'seq/adnan', count: 120 },
-    href: 'https://drive.google.com/uc?export=download&id=1yYxUuls0lqLp9pPJDBtV_y9pXkTGzkEM',
+    href: 'https://github.com/mdaadil87/adnan-ai-updates/releases/download/v12.5.0/AdnanAI-12.5.0.apk,
     cta: 'Download app'
   },
   {
