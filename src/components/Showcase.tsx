@@ -34,7 +34,7 @@ gallery: [
     tags: ["Android", "Kotlin", "AI Assistant"],
     metric: "Android app",
     alt: "Adnan AI app preview",
-    href: "https://drive.google.com/uc?export=download&id=1yYxUuls0lqLp9pPJDBtV_y9pXkTGzkEM",
+    href: "https://github.com/mdaadil87/adnan-ai-updates/releases/download/v12.5.0/AdnanAI-12.5.0.apk",
   },
   {
     id: "interior-carpenter",
